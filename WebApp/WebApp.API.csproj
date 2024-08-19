@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApp.Domain\WebApp.Domain.csproj" />
+    <ProjectReference Include="..\WebApp.Infrastracture\WebApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
