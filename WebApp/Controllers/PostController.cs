@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.API.Contracts;
 using WebApp.API.Domain;
+using WebApp.Infrastracture;
 
 namespace WebApp.API.Controllers
 {
@@ -8,6 +9,11 @@ namespace WebApp.API.Controllers
     [Route("[controller]")]
     public class PostController : ControllerBase
     {
+
+        private readonly ApplicationDbContext _context; 
+
+
+
         //get http://localhost:port/Post/1?page=1&size=10
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get([FromRoute] int id, [FromQuery] int page, [FromQuery] int? size) 
@@ -30,7 +36,8 @@ namespace WebApp.API.Controllers
                 request.Adress
                 );
                   
-
+            _context.Posts.Add(post);
+            _context.SaveChanges();
             return Ok();
         }
 

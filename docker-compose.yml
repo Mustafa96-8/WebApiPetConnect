@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  webapp.api:
+    image: ${DOCKER_REGISTRY-}webappapi
+    build:
+      context: .
+      dockerfile: WebApp/Dockerfile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

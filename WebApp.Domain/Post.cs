@@ -2,6 +2,10 @@
 {
     public class Post
     {
+        private Post()
+        {
+
+        }
         public Post(
             string name,
             string breed,
@@ -9,7 +13,7 @@
             int height,
             bool vaccine,
             DateOnly birthDate,
-            string photo,
+            MainPhoto mainphoto,
             string description,
             string adress)
         {
@@ -19,39 +23,31 @@
             Height = height;
             Vaccine = vaccine;
             BirthDate = birthDate;
-            Photo = photo;
+            MainPhoto = mainphoto;
             Description = description;
             Adress = adress;
         }
 
-        public string Name { get;private set; } = string.Empty;
+        public Guid Id { get; private set; }
+        public string Name { get; private set; } = string.Empty;
 
-        public string Breed { get;private set; } = string.Empty;
+        public string Breed { get; private set; } = string.Empty;
 
-        public Weight Weight { get;private set; } = default!;
+        public Weight Weight { get; private set; } = default!;
 
-        public int Height { get;private set; }
+        public int Height { get; private set; }
 
-        public bool Vaccine { get;private set; }
+        public bool Vaccine { get; private set; }
 
-        public DateOnly BirthDate {private get; set; }
-        
-        public string Photo {get;private set;} = string.Empty;
+        public DateOnly BirthDate { private get; set; }
 
-        public string Description { get;private set; } = string.Empty ;
+        public MainPhoto MainPhoto { get; private set; }
+        public List<Photo> Photos { get; private set; }
 
-        public string Adress    { get;private set; } = string .Empty ;
+        public string Description { get; private set; } = string.Empty;
+
+        public string Adress { get; private set; } = string.Empty;
 
     }
-    public class Weight
-    {
-        public int Grams { get; set; }
-
-        public Weight(float weight)
-        {
-            Grams = Convert.ToInt32(weight * 1000);
-        }
-    }
-
-   
 }
+
