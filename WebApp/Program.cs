@@ -10,10 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => 
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(ApplicationDbContext)));
-});
+builder.Services.AddScoped<PetFamilyDbContext>();
 
 var app = builder.Build();
 

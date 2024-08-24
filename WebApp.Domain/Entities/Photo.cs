@@ -1,15 +1,17 @@
-﻿namespace WebApp.API.Domain
+﻿namespace WebApp.Domain.Entities
 {
     public class Photo
     {
-        public Photo(Guid id, string path)
+
+        private Photo() { }
+        public Photo( string path)
         {
-            Id = id;
             Path = path;
         }
 
         public Guid Id { get; private set; }
         public string Path { get; private set; }
 
+        public bool IsMain { get; private set; }
     }
 }
