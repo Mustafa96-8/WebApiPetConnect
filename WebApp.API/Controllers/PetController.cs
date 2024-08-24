@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.API.Contracts;
-using WebApp.Domain;
-using WebApp.Domain.Entities;
 using WebApp.Infrastracture;
 
 namespace WebApp.API.Controllers
@@ -11,7 +9,7 @@ namespace WebApp.API.Controllers
     public class PetController : ControllerBase
     {
 
-        private readonly PetFamilyDbContext _context; 
+        private readonly IPetService _context; 
 
 
 

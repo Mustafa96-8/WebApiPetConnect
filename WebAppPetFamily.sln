@@ -11,9 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Infrastructure", "WebApp.Infrastracture\WebApp.Infrastructure.csproj", "{102DA902-DC05-4B2C-87DE-59A2EDF18577}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4F834046-DFC1-4CA8-B293-FCF828200B54} = {4F834046-DFC1-4CA8-B293-FCF828200B54}
-	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5878262A-E791-4B1F-8A94-F068038F3AEA}"
 EndProject
