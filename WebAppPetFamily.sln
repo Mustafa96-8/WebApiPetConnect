@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.API", "WebApp\WebApp.API.csproj", "{CEDF69E4-AF1F-4F4D-B655-01FF357D4129}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Domain", "WebApp.Domain\WebApp.Domain.csproj", "{F955FCE4-DE93-41CE-8D49-123E08619DAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E12001E7-39DF-4D11-8B7F-8523390E24BE}"
@@ -13,10 +11,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Infrastructure", "WebApp.Infrastracture\WebApp.Infrastructure.csproj", "{102DA902-DC05-4B2C-87DE-59A2EDF18577}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F834046-DFC1-4CA8-B293-FCF828200B54} = {4F834046-DFC1-4CA8-B293-FCF828200B54}
+	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5878262A-E791-4B1F-8A94-F068038F3AEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Application", "..\WebApp.Application\WebApp.Application.csproj", "{3D9739D2-F30C-4A64-B76E-25B2783BB5DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.API", "WebApp.API\WebApp.API.csproj", "{283010D8-EA62-4E7B-8891-E3DD693EDC07}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F834046-DFC1-4CA8-B293-FCF828200B54} = {4F834046-DFC1-4CA8-B293-FCF828200B54}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Application", "WebApp.Application\WebApp.Application.csproj", "{4F834046-DFC1-4CA8-B293-FCF828200B54}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F955FCE4-DE93-41CE-8D49-123E08619DAC} = {F955FCE4-DE93-41CE-8D49-123E08619DAC}
 	EndProjectSection
@@ -27,10 +33,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CEDF69E4-AF1F-4F4D-B655-01FF357D4129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEDF69E4-AF1F-4F4D-B655-01FF357D4129}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEDF69E4-AF1F-4F4D-B655-01FF357D4129}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEDF69E4-AF1F-4F4D-B655-01FF357D4129}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F955FCE4-DE93-41CE-8D49-123E08619DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F955FCE4-DE93-41CE-8D49-123E08619DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F955FCE4-DE93-41CE-8D49-123E08619DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,10 +45,14 @@ Global
 		{5878262A-E791-4B1F-8A94-F068038F3AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5878262A-E791-4B1F-8A94-F068038F3AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5878262A-E791-4B1F-8A94-F068038F3AEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D9739D2-F30C-4A64-B76E-25B2783BB5DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D9739D2-F30C-4A64-B76E-25B2783BB5DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D9739D2-F30C-4A64-B76E-25B2783BB5DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D9739D2-F30C-4A64-B76E-25B2783BB5DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{283010D8-EA62-4E7B-8891-E3DD693EDC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{283010D8-EA62-4E7B-8891-E3DD693EDC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{283010D8-EA62-4E7B-8891-E3DD693EDC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{283010D8-EA62-4E7B-8891-E3DD693EDC07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F834046-DFC1-4CA8-B293-FCF828200B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F834046-DFC1-4CA8-B293-FCF828200B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F834046-DFC1-4CA8-B293-FCF828200B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F834046-DFC1-4CA8-B293-FCF828200B54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
