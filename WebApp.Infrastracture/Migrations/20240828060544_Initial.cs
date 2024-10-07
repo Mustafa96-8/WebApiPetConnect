@@ -18,7 +18,7 @@ namespace WebApp.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     nickname = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    birth_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    birth_date = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     breed = table.Column<string>(type: "text", nullable: false),
                     color = table.Column<string>(type: "text", nullable: false),
                     castration = table.Column<bool>(type: "boolean", nullable: false),
@@ -27,9 +27,8 @@ namespace WebApp.Infrastructure.Migrations
                     health = table.Column<string>(type: "text", nullable: false),
                     only_one_in_family = table.Column<bool>(type: "boolean", nullable: false),
                     height = table.Column<int>(type: "integer", maxLength: 1000, nullable: true),
-                    vaccine = table.Column<bool>(type: "boolean", nullable: false),
                     on_treatment = table.Column<bool>(type: "boolean", nullable: false),
-                    created_time = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTime(2024, 8, 24, 9, 10, 21, 28, DateTimeKind.Utc).AddTicks(2508)),
+                    created_time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2024, 8, 28, 6, 5, 44, 383, DateTimeKind.Unspecified).AddTicks(5690), new TimeSpan(0, 0, 0, 0, 0))),
                     building = table.Column<string>(type: "text", nullable: false),
                     city = table.Column<string>(type: "text", nullable: false),
                     index = table.Column<string>(type: "text", nullable: false),
@@ -37,7 +36,7 @@ namespace WebApp.Infrastructure.Migrations
                     contact_phone_number = table.Column<string>(type: "text", nullable: false),
                     value = table.Column<string>(type: "text", nullable: false),
                     volunteer_phone_number = table.Column<string>(type: "text", nullable: false),
-                    weight = table.Column<int>(type: "integer", nullable: false)
+                    weight = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

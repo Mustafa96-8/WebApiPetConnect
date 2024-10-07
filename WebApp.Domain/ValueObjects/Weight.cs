@@ -1,17 +1,25 @@
-﻿namespace WebApp.Domain.ValueObjects
+﻿using CSharpFunctionalExtensions;
+using WebApp.Domain.Common;
+
+namespace WebApp.Domain.ValueObjects
 {
     public record Weight
     {
-        private Weight()
+       
+        public Weight(float killograms)
         {
-            
+            Killograms = killograms;
         }
-        public Weight(float weight)
-        {
-            Grams = Convert.ToInt32(weight * 1000);
-        }
-        public int Grams { get; private set; }
+        public float Killograms { get; private set; }
 
+        public static Result<Weight, Error> Create(float killograms) 
+        {                       
+            if (killograms < 0)
+            {
+                return Errors.General.ValueIsInvalid();
+            }
+            return new Weight(killograms);
+        }
 
     }
 

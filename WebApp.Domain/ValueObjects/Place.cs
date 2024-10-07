@@ -1,4 +1,7 @@
-﻿namespace WebApp.Domain.ValueObjects
+﻿using CSharpFunctionalExtensions;
+using WebApp.Domain.Common;
+
+namespace WebApp.Domain.ValueObjects
 {
     public record Place
     {
@@ -14,19 +17,19 @@
             Value = value;
         }
 
-        public static Place Create(string input)
+        public static Result<Place,Error> Create(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
-                throw new ArgumentNullException();
+                return Errors.Place.ValueIsRequired();
             }
 
             var place = input.Trim().ToUpper();
             if (_all.Any(p => p.Value.ToUpper() == input) == false)
             {
-                throw new ArgumentException();
+                return Errors.General.ValueIsInvalid();
             }
-            return new(place);
+            return new Place(place);
         }
     }
 }

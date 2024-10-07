@@ -24,9 +24,8 @@ namespace WebApp.Infrastructure.Configurations
             builder.Property(p =>p.OnlyOneInFamily).IsRequired();
             builder.Property(p =>p.Health).IsRequired();
             builder.Property(p => p.Height).IsRequired(false).HasMaxLength(1000);
-            builder.Property(p => p.Vaccine).IsRequired();
             builder.Property(p => p.OnTreatment).IsRequired();
-            builder.Property(p => p.CreatedTime).IsRequired().HasDefaultValue(DateTime.UtcNow);
+            builder.Property(p => p.CreatedTime).IsRequired().HasDefaultValue(DateTimeOffset.UtcNow);
 
 
 
@@ -44,7 +43,7 @@ namespace WebApp.Infrastructure.Configurations
                 b=> { b.Property(a => a.Value).HasColumnName("value");});
             
             builder.ComplexProperty(p =>p.Weight, 
-                b=> { b.Property(a => a.Grams).HasColumnName("weight");}); 
+                b=> { b.Property(a => a.Killograms).HasColumnName("weight");}); 
 
             builder.ComplexProperty(p =>p.ContactPhoneNumber, 
                 b=> { b.Property(a => a.Number).HasColumnName("contact_phone_number");}); 
@@ -55,7 +54,7 @@ namespace WebApp.Infrastructure.Configurations
             
             //Один ко многим связь тип много фоток к 1 посту
             builder.HasMany(p => p.Photos).WithOne(); 
-            builder.HasMany(p=>p.Vaccinations).WithOne();
+            builder.HasMany(p => p.Vaccinations).WithOne();
 
         }
     }

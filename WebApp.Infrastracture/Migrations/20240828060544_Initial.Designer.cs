@@ -13,7 +13,7 @@ using WebApp.Infrastracture;
 namespace WebApp.Infrastructure.Migrations
 {
     [DbContext(typeof(PetFamilyDbContext))]
-    [Migration("20240824091021_Initial")]
+    [Migration("20240828060544_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("animal_attitude");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTimeOffset>("BirthDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("birth_date");
 
@@ -56,10 +56,10 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("color");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTimeOffset>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 24, 9, 10, 21, 28, DateTimeKind.Utc).AddTicks(2508))
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2024, 8, 28, 6, 5, 44, 383, DateTimeKind.Unspecified).AddTicks(5690), new TimeSpan(0, 0, 0, 0, 0)))
                         .HasColumnName("created_time");
 
                     b.Property<string>("Description")
@@ -94,10 +94,6 @@ namespace WebApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("people_attitude");
-
-                    b.Property<bool>("Vaccine")
-                        .HasColumnType("boolean")
-                        .HasColumnName("vaccine");
 
                     b.ComplexProperty<Dictionary<string, object>>("Address", "WebApp.Domain.Entities.Pet.Address#Address", b1 =>
                         {
@@ -158,8 +154,8 @@ namespace WebApp.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int>("Grams")
-                                .HasColumnType("integer")
+                            b1.Property<float>("Killograms")
+                                .HasColumnType("real")
                                 .HasColumnName("weight");
                         });
 
