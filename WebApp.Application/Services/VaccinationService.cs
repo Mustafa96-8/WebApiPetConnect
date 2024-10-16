@@ -1,19 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebApp.Application.Services.IServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using WebApp.Domain.Entities;
 using WebApp.Infrastracture;
 
-
 namespace WebApp.Application.Services
 {
-    public class PetService(PetFamilyDbContext petFamilyDbContext) : IPetService
+    public class VaccinationService(PetFamilyDbContext petFamilyDbContext)
     {
         private readonly PetFamilyDbContext _petFamilyDbContext = petFamilyDbContext;
-
-        public Task Create()
-        {
-            throw new NotImplementedException();
-        }
 
         public Task Delete(Guid id)
         {
@@ -22,7 +19,7 @@ namespace WebApp.Application.Services
 
         public async Task<Pet> Get(Guid id)
         {
-            var Pet = await _petFamilyDbContext.Pets.FirstOrDefaultAsync(p=> p.Id == id);
+            var Pet = await _petFamilyDbContext.Pets.FirstOrDefaultAsync(p => p.Id == id);
             return Pet;
 
         }
@@ -31,6 +28,5 @@ namespace WebApp.Application.Services
         {
             throw new NotImplementedException();
         }
-
     }
 }

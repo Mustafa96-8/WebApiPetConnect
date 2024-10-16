@@ -58,7 +58,7 @@ namespace WebApp.Domain.Entities
 
         private readonly List<Photo> _photos = [];
 
-        public Pet(
+        private Pet(
             string nickname,
             string description,
             DateTimeOffset birthDate,
@@ -78,9 +78,8 @@ namespace WebApp.Domain.Entities
             bool onTreatment,
             DateTimeOffset createdTime,
             List<Vaccination> vaccinations,
-            List<Photo> photos,
-            string name,
-            string adress)
+            List<Photo> photos
+            )
         {
             Nickname = nickname;
             Description = description;
@@ -123,9 +122,8 @@ namespace WebApp.Domain.Entities
             bool onTreatment,
             DateTimeOffset createdTime,
             List<Vaccination> vaccinations,
-            List<Photo> photos,
-            string name,
-            string adress)
+            List<Photo> photos
+            )
         {
             if (nickname.IsEmpty() || nickname.Length>MAX_NAME_LENGTH)
                 return Errors.General.InvalidLength(nickname);
@@ -156,9 +154,8 @@ namespace WebApp.Domain.Entities
                 onTreatment,
                 createdTime,
                 vaccinations,
-                photos,
-                name,
-                adress);
+                photos
+                );
         }
     }
 }

@@ -13,8 +13,10 @@ namespace WebApp.Application.Services.IServices
         Task<Pet> Get(Guid id);
 
         Task<List<Pet>> GetAll();
+
         Task Delete(Guid id);
-        
+
+        Task Create();
         
     }
 }
