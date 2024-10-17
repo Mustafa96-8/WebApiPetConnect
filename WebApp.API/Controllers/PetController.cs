@@ -25,9 +25,7 @@ namespace WebApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePetRequest request, CancellationToken ct)
         {
-            var Pet = _petService.Create(request);
-            if (Pet.IsFailure) 
-                return BadRequest(Pet.Error);
+            var Pet = _petService.Create();
             return Ok();
         }
 

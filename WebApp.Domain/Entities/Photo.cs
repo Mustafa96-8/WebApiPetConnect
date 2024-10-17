@@ -6,7 +6,7 @@ namespace WebApp.Domain.Entities
     public class Photo
     {
 
-        public Photo() { }
+        private Photo() { }
         
         private Photo( string path, bool isMain)
         {
