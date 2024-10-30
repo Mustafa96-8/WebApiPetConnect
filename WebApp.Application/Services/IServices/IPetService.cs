@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Contracts;
+using CSharpFunctionalExtensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApp.Domain.Common;
 using WebApp.Domain.Entities;
 
 namespace WebApp.Application.Services.IServices
@@ -16,7 +19,7 @@ namespace WebApp.Application.Services.IServices
 
         Task Delete(Guid id);
 
-        Task Create();
-        
+        Task<Result<Guid, Error>> Create(CreatePetRequest request, CancellationToken ct);
+
     }
 }

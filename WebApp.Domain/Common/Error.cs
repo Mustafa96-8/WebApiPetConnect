@@ -32,8 +32,8 @@ namespace WebApp.Domain.Common
 
             public static Error ValueIsRequired(string? field = null)=>
                 new Error("Value.is.required",$"Value is Required {field}");
-            public static Error ValueIsInvalid() =>
-                new Error("Value.is.invalid", "Value is Invalid");
+            public static Error ValueIsInvalid(string? field = null) =>
+                new Error("Value.is.invalid", $"Value is Invalid {field}");
 
             public static Error InvalidLength(string? name=null)
             {

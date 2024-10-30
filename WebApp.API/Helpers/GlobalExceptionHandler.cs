@@ -15,11 +15,13 @@ namespace WebApp.API.Helpers
             Exception exception,
             CancellationToken cancellationToken)
         {
+            //Принимаем сообщение об ошибке и логируем её
             var exceptionMessage = exception.Message;
             _logger.LogError(
                 "Error Message: {exceptionMessage}, Time of occurrence {time}",
                 exceptionMessage, DateTime.UtcNow);
 
+            //Своё сообщение об ошибке
             var response = new Response
             {
                 Code = "value.invalid" ,

@@ -56,7 +56,7 @@ namespace WebApp.Infrastructure.Migrations
                     b.Property<DateTimeOffset>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2024, 8, 28, 6, 5, 44, 383, DateTimeKind.Unspecified).AddTicks(5690), new TimeSpan(0, 0, 0, 0, 0)))
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2024, 10, 30, 7, 49, 17, 456, DateTimeKind.Unspecified).AddTicks(3658), new TimeSpan(0, 0, 0, 0, 0)))
                         .HasColumnName("created_time");
 
                     b.Property<string>("Description")
@@ -170,7 +170,9 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<bool>("IsMain")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
+                        .HasDefaultValue(false)
                         .HasColumnName("is_main");
 
                     b.Property<string>("Path")
@@ -204,7 +206,8 @@ namespace WebApp.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("PetId")

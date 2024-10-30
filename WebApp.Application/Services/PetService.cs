@@ -1,40 +1,72 @@
 ﻿using Contracts;
 using CSharpFunctionalExtensions;
-using Microsoft.EntityFrameworkCore;
+using WebApp.Application.Abstractions;
 using WebApp.Application.Services.IServices;
 using WebApp.Domain.Common;
 using WebApp.Domain.Entities;
 using WebApp.Domain.ValueObjects;
-using WebApp.Infrastracture;
 
 
 namespace WebApp.Application.Services
 {
-    public class PetService(PetFamilyDbContext petFamilyDbContext) : IPetService
+    public class PetService(IPetsRepository petsRepository):IPetService
     {
-        private readonly PetFamilyDbContext _petFamilyDbContext = petFamilyDbContext;
+        private readonly IPetsRepository _petsRepository= petsRepository;
 
-        public Result<Pet,Error> Create(CreatePetRequest petRequest)
+        public async Task<Result<Guid, Error>> Create(CreatePetRequest request, CancellationToken ct)
         {
             var address = Address.Create(
-                petRequest.City,
-                petRequest.Street,
-                petRequest.Building,
-                petRequest.Index
+                request.City,
+                request.Street,
+                request.Building,
+                request.Index
                 );
-            if (address.IsFailure) 
-            {
+            if (address.IsFailure)
                 return address.Error;
-            }
-            var NewPet = Pet.Create(
-                petRequest.Nickname,
-                petRequest.Description,
-                petRequest.BirthDate,
-                petRequest.Breed,
-                petRequest.Color,
-                petRequest.Address,
-            if (NewPet.IsFaulted)
-                return BadRequest(NewPet.Error);
+
+            var place = Place.Create(request.Place);
+            if (place.IsFailure)
+                return place.Error;
+            
+            var weight = Weight.Create(request.Weight);
+            if (weight.IsFailure)
+                return weight.Error;
+
+            var contactPhoneNumber = PhoneNumber.Create(request.ContactPhoneNumber);
+            if (contactPhoneNumber.IsFailure)
+                return contactPhoneNumber.Error;
+
+            var volunteerPhoneNumber = PhoneNumber.Create(request.VolunteerPhoneNumber);
+            if (volunteerPhoneNumber.IsFailure) 
+                return volunteerPhoneNumber.Error;
+
+
+
+            var pet = Pet.Create(
+                request.Nickname,
+                request.Description,
+                request.BirthDate,
+                request.Breed,
+                request.Color,
+                address.Value,
+                place.Value,
+                request.Castration,
+                request.PeopleAttitude,
+                request.AnimalAttitude,
+                request.Health,
+                request.OnlyOneInFamily,
+                weight.Value,
+                request.Height,
+                contactPhoneNumber.Value,
+                volunteerPhoneNumber.Value,
+                request.OnTreatment,
+                request.CreatedTime);
+
+            var id = await _petsRepository.Add(pet.Value, ct);
+            if (id.IsFailure)
+                return id.Error;    
+
+            return id.Value;
 
         }
         public Task Delete(Guid id)
@@ -44,8 +76,7 @@ namespace WebApp.Application.Services
 
         public async Task<Pet> Get(Guid id)
         {
-            var Pet = await _petFamilyDbContext.Pets.FirstOrDefaultAsync(p=> p.Id == id);
-            return Pet;
+            throw new NotImplementedException();
 
         }
 

@@ -18,11 +18,11 @@ namespace WebApp.Domain.ValueObjects
         {
             if (input.IsEmpty())
             {
-                return Errors.General.ValueIsRequired(nameof(PhoneNumber));
+                return Errors.General.ValueIsRequired();
             }
             if (Regex.IsMatch(input, russionPhoneRegex) == false)
             {
-                return Errors.General.ValueIsInvalid(nameof(PhoneNumber));
+                return Errors.General.ValueIsInvalid();
             }
             return new PhoneNumber(input);
         }

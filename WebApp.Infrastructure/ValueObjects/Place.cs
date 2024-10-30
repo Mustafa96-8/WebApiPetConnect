@@ -25,9 +25,9 @@ namespace WebApp.Domain.ValueObjects
             }
 
             var place = input.Trim().ToUpper();
-            if (_all.Any(p => p.Value.ToUpper() == place) == false)
+            if (_all.Any(p => p.Value.ToUpper() == input) == false)
             {
-                return Errors.General.ValueIsInvalid(nameof(Place));
+                return Errors.General.ValueIsInvalid();
             }
             return new Place(place);
         }
