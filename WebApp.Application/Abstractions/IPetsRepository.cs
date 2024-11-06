@@ -12,5 +12,6 @@ namespace WebApp.Application.Abstractions
     public interface IPetsRepository
     {
         Task<Result<Guid,Error>> Add(Pet pet, CancellationToken ct);
+        Task Add(object value, CancellationToken ct);
     }
 }
