@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.API.Helpers;
+using WebApp.Application;
 using WebApp.Application.Abstractions;
 using WebApp.Application.Services;
 using WebApp.Application.Services.IServices;
@@ -17,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PetFamilyDbContext>();
 builder.Services.AddScoped<IPetsRepository,PetRepository>();
 
-builder.Services.AddScoped<IPetService,PetService>();
+builder.Services.AddAplication();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();

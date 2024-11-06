@@ -40,6 +40,8 @@ namespace WebApp.Application.Services
             if (volunteerPhoneNumber.IsFailure) 
                 return volunteerPhoneNumber.Error;
 
+            var vaccinations = Vaccination.Create(request)
+
 
 
             var pet = Pet.Create(
@@ -60,7 +62,9 @@ namespace WebApp.Application.Services
                 contactPhoneNumber.Value,
                 volunteerPhoneNumber.Value,
                 request.OnTreatment,
-                request.CreatedTime);
+                request.CreatedTime,
+                request.Vaccinations,
+                request.Photos);
 
             var id = await _petsRepository.Add(pet.Value, ct);
             if (id.IsFailure)

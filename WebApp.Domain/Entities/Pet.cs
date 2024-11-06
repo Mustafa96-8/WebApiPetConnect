@@ -120,9 +120,9 @@ namespace WebApp.Domain.Entities
             PhoneNumber contactPhoneNumber,
             PhoneNumber volunteerPhoneNumber,
             bool onTreatment,
-            DateTimeOffset createdTime/*,
+            DateTimeOffset createdTime,
             List<Vaccination> vaccinations,
-            List<Photo> photos*/
+            List<Photo> photos
             )
         {
             if (nickname.IsEmpty() || nickname.Length>MAX_NAME_LENGTH)
@@ -152,9 +152,9 @@ namespace WebApp.Domain.Entities
                 contactPhoneNumber,
                 volunteerPhoneNumber,
                 onTreatment,
-                createdTime/*,
+                createdTime,
                 vaccinations,
-                photos*/
+                photos
                 );
         }
     }

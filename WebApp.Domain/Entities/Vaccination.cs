@@ -18,8 +18,9 @@ namespace WebApp.Domain.Entities
         public DateTime Applied {  get; private set; }
         public static Result<Vaccination, Error> Create(string name, DateTime applied)
         {
-            if (name.IsEmpty())
-                return Errors.General.ValueIsRequired(name);
+            name = name.Trim();
+            if (name.Length is <1 or >100)
+                return Errors.General.InvalidLength(name);
 
             return new Vaccination(name, applied);
         }
