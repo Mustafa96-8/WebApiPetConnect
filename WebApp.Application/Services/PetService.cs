@@ -20,27 +20,17 @@ namespace WebApp.Application.Services
                 request.Street,
                 request.Building,
                 request.Index
-                );
-            if (address.IsFailure)
-                return address.Error;
+                ).Value;
 
-            var place = Place.Create(request.Place);
-            if (place.IsFailure)
-                return place.Error;
+            var place = Place.Create(request.Place).Value;
             
-            var weight = Weight.Create(request.Weight);
-            if (weight.IsFailure)
-                return weight.Error;
+            var weight = Weight.Create(request.Weight).Value;
 
-            var contactPhoneNumber = PhoneNumber.Create(request.ContactPhoneNumber);
-            if (contactPhoneNumber.IsFailure)
-                return contactPhoneNumber.Error;
+            var contactPhoneNumber = PhoneNumber.Create(request.ContactPhoneNumber).Value;
 
-            var volunteerPhoneNumber = PhoneNumber.Create(request.VolunteerPhoneNumber);
-            if (volunteerPhoneNumber.IsFailure) 
-                return volunteerPhoneNumber.Error;
+            var volunteerPhoneNumber = PhoneNumber.Create(request.VolunteerPhoneNumber).Value;
 
-            var vaccinations = Vaccination.Create(request)
+            //var vaccinations = Vaccination.Create(request.Vaccinations);
 
 
 
@@ -50,17 +40,17 @@ namespace WebApp.Application.Services
                 request.BirthDate,
                 request.Breed,
                 request.Color,
-                address.Value,
-                place.Value,
+                address,
+                place,
                 request.Castration,
                 request.PeopleAttitude,
                 request.AnimalAttitude,
                 request.Health,
                 request.OnlyOneInFamily,
-                weight.Value,
+                weight,
                 request.Height,
-                contactPhoneNumber.Value,
-                volunteerPhoneNumber.Value,
+                contactPhoneNumber,
+                volunteerPhoneNumber,
                 request.OnTreatment,
                 request.CreatedTime,
                 request.Vaccinations,
