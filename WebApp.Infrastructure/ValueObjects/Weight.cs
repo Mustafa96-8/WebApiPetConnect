@@ -16,7 +16,7 @@ namespace WebApp.Domain.ValueObjects
         {                       
             if (killograms < 0)
             {
-                return Errors.General.ValueIsInvalid("Weight");
+                return Errors.General.ValueIsInvalid();
             }
             return new Weight(killograms);
         }

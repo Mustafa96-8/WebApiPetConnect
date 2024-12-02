@@ -1,12 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using CSharpFunctionalExtensions;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Emit;
+using WebApp.Domain.Common;
 using WebApp.Domain.ValueObjects;
 
 namespace WebApp.Domain.Entities
 {
     public class Pet
     {
-
+        public const int MAX_NAME_LENGTH = 100;
         private Pet()
         {
             
@@ -16,7 +18,7 @@ namespace WebApp.Domain.Entities
 
         public string Description { get; private set; } = string.Empty;
 
-        public DateTime BirthDate { get; private set; }
+        public DateTimeOffset BirthDate { get; private set; }
         public string Breed { get; private set; } = string.Empty;
 
         public string Color { get; private set; }
@@ -40,14 +42,13 @@ namespace WebApp.Domain.Entities
 
         public int? Height { get; private set; }
 
-        public bool Vaccine { get; private set; }
 
         public PhoneNumber ContactPhoneNumber { get; private set; }
 
         public PhoneNumber VolunteerPhoneNumber { get; private set; }
         public bool OnTreatment { get; private set; }
 
-        public DateTime CreatedTime { get; private set; }
+        public DateTimeOffset CreatedTime { get; private set; }
 
         public IReadOnlyCollection<Vaccination> Vaccinations=> _vaccinations;
         private readonly List<Vaccination> _vaccinations = [];
@@ -57,10 +58,10 @@ namespace WebApp.Domain.Entities
 
         private readonly List<Photo> _photos = [];
 
-        public Pet(
+        private Pet(
             string nickname,
             string description,
-            DateTime birthDate,
+            DateTimeOffset birthDate,
             string breed,
             string color,
             Address address,
@@ -72,15 +73,13 @@ namespace WebApp.Domain.Entities
             bool onlyOneInFamily,
             Weight weight,
             int? height,
-            bool vaccine,
             PhoneNumber contactPhoneNumber,
             PhoneNumber volunteerPhoneNumber,
             bool onTreatment,
-            DateTime createdTime,
+            DateTimeOffset createdTime/*,
             List<Vaccination> vaccinations,
-            List<Photo> photos,
-            string name,
-            string adress)
+            List<Photo> photos*/
+            )
         {
             Nickname = nickname;
             Description = description;
@@ -95,13 +94,68 @@ namespace WebApp.Domain.Entities
             Health = health;
             OnlyOneInFamily = onlyOneInFamily;
             Height = height;
-            Vaccine = vaccine;
             Weight = weight;
             ContactPhoneNumber = contactPhoneNumber;
             VolunteerPhoneNumber = volunteerPhoneNumber;
             OnTreatment = onTreatment;
             CreatedTime = createdTime;
-            _vaccinations = vaccinations;
+            //_vaccinations = vaccinations;
+        }
+
+        public static Result<Pet,Error> Create(
+            string nickname,
+            string description,
+            DateTimeOffset birthDate,
+            string breed,
+            string color,
+            Address address,
+            Place place,
+            bool castration,
+            string peopleAttitude,
+            string animalAttitude,
+            string health,
+            bool onlyOneInFamily,
+            Weight weight,
+            int? height,
+            PhoneNumber contactPhoneNumber,
+            PhoneNumber volunteerPhoneNumber,
+            bool onTreatment,
+            DateTimeOffset createdTime,
+            List<Vaccination> vaccinations,
+            List<Photo> photos
+            )
+        {
+            if (nickname.IsEmpty() || nickname.Length>MAX_NAME_LENGTH)
+                return Errors.General.InvalidLength(nickname);
+
+            if (color.IsEmpty())
+                return Errors.General.ValueIsRequired(nameof(color));
+
+            if (health.IsEmpty())
+                return Errors.General.ValueIsRequired(nameof(color));
+
+            return new Pet(
+                nickname,
+                description,
+                birthDate,
+                breed,
+                color,
+                address,
+                place,
+                castration,
+                peopleAttitude,
+                animalAttitude,
+                health,
+                onlyOneInFamily,
+                weight,
+                height,
+                contactPhoneNumber,
+                volunteerPhoneNumber,
+                onTreatment,
+                createdTime,
+                vaccinations,
+                photos
+                );
         }
     }
 }

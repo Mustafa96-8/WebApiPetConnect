@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebApp.Infrastracture;
@@ -12,9 +13,11 @@ using WebApp.Infrastracture;
 namespace WebApp.Infrastructure.Migrations
 {
     [DbContext(typeof(PetFamilyDbContext))]
-    partial class PetFamilyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241030074917_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,7 +38,7 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("animal_attitude");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTimeOffset>("BirthDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("birth_date");
 
@@ -53,10 +56,10 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("color");
 
-                    b.Property<DateTime>("CreatedTime")
+                    b.Property<DateTimeOffset>("CreatedTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValue(new DateTime(2024, 8, 24, 9, 10, 21, 28, DateTimeKind.Utc).AddTicks(2508))
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2024, 10, 30, 7, 49, 17, 456, DateTimeKind.Unspecified).AddTicks(3658), new TimeSpan(0, 0, 0, 0, 0)))
                         .HasColumnName("created_time");
 
                     b.Property<string>("Description")
@@ -91,10 +94,6 @@ namespace WebApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("people_attitude");
-
-                    b.Property<bool>("Vaccine")
-                        .HasColumnType("boolean")
-                        .HasColumnName("vaccine");
 
                     b.ComplexProperty<Dictionary<string, object>>("Address", "WebApp.Domain.Entities.Pet.Address#Address", b1 =>
                         {
@@ -155,8 +154,8 @@ namespace WebApp.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int>("Grams")
-                                .HasColumnType("integer")
+                            b1.Property<float>("Killograms")
+                                .HasColumnType("real")
                                 .HasColumnName("weight");
                         });
 
@@ -174,7 +173,9 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<bool>("IsMain")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
+                        .HasDefaultValue(false)
                         .HasColumnName("is_main");
 
                     b.Property<string>("Path")
@@ -208,7 +209,8 @@ namespace WebApp.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("PetId")

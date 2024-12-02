@@ -19,15 +19,15 @@ namespace WebApp.Domain.ValueObjects
 
         public static Result<Place,Error> Create(string input)
         {
-            input = input.Trim();
-            if (input.Length <1)
+            if (string.IsNullOrEmpty(input))
             {
-                return Errors.General.InvalidLength("place");
+                return Errors.Place.ValueIsRequired();
             }
-            var place = input.ToUpper();
-            if (_all.Any(p => p.Value.ToUpper() == place) == false)
+
+            var place = input.Trim().ToUpper();
+            if (_all.Any(p => p.Value.ToUpper() == input) == false)
             {
-                return Errors.General.ValueIsInvalid(nameof(Place));
+                return Errors.General.ValueIsInvalid();
             }
             return new Place(place);
         }
