@@ -30,7 +30,7 @@ namespace WebApp.Application.Services
 
             var volunteerPhoneNumber = PhoneNumber.Create(request.VolunteerPhoneNumber).Value;
 
-            //var vaccinations = Vaccination.Create(request.Vaccinations);
+            var vaccinations = Vaccination.Create(request.Vaccinations);
 
 
 
@@ -53,8 +53,8 @@ namespace WebApp.Application.Services
                 volunteerPhoneNumber,
                 request.OnTreatment,
                 request.CreatedTime,
-                request.Vaccinations,
-                request.Photos);
+                new List<Vaccination>(),
+                new List<Photo>());
 
             var id = await _petsRepository.Add(pet.Value, ct);
             if (id.IsFailure)
@@ -68,10 +68,11 @@ namespace WebApp.Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Pet> Get(Guid id)
+        public async Task<Result<Pet,Error>> Get(Guid id,CancellationToken ct)
         {
-            throw new NotImplementedException();
+            var petFromDb = await _petsRepository.Get(id,ct);
 
+            return petFromDb.Value;
         }
 
         public Task<List<Pet>> GetAll()

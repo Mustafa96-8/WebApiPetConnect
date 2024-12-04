@@ -9,10 +9,10 @@ using WebApp.Domain.Entities;
 
 namespace WebApp.Application.Abstractions
 {
-    public interface IPetsRepository
+    public interface IVaccinationsRepository
     {
-        Task<IResult<Guid,Error>> Add(Pet pet, CancellationToken ct);
+        Task<IResult<Guid, Error>> Add(Vaccination vaccination, CancellationToken ct);
 
-        Task<IResult<Pet, Error>> Get(Guid id, CancellationToken ct);
+        Task<IResult<Vaccination, Error>> Get( Guid id,CancellationToken ct);
     }
 }
