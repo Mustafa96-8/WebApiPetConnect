@@ -13,7 +13,7 @@ namespace WebApp.Application.Services.IServices
     public interface IPetService
 
     {
-        Task<Pet> Get(Guid id);
+        Task<Result<Pet,Error>> Get(Guid id, CancellationToken ct);
 
         Task<List<Pet>> GetAll();
 
