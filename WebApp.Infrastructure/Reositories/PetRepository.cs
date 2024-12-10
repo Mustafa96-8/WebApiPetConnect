@@ -44,7 +44,10 @@ namespace WebApp.Infrastructure.Reositories
 
         public async Task<Result<IEnumerable<Pet>, Error>> GetAll(CancellationToken ct, string? includeProperties = null)
         {
-            var Pets = await _dbContext.As
+            var Pets = await _dbContext.Pets.ToListAsync(ct);
+
+            return Pets;
+
         }
 
     }

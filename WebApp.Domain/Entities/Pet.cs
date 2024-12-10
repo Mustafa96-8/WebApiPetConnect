@@ -76,9 +76,9 @@ namespace WebApp.Domain.Entities
             PhoneNumber contactPhoneNumber,
             PhoneNumber volunteerPhoneNumber,
             bool onTreatment,
-            DateTimeOffset createdTime/*,
+            DateTimeOffset createdTime,
             List<Vaccination> vaccinations,
-            List<Photo> photos*/
+            List<Photo> photos
             )
         {
             Nickname = nickname;
@@ -99,7 +99,7 @@ namespace WebApp.Domain.Entities
             VolunteerPhoneNumber = volunteerPhoneNumber;
             OnTreatment = onTreatment;
             CreatedTime = createdTime;
-            //_vaccinations = vaccinations;
+            _vaccinations = vaccinations;
         }
 
         public static Result<Pet,Error> Create(

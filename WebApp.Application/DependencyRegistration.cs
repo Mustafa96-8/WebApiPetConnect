@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApp.Application.Services;
+using WebApp.Application.Services.IServices;
 
 namespace WebApp.Application
 {
@@ -13,7 +14,7 @@ namespace WebApp.Application
     {
         public static IServiceCollection AddAplication(this IServiceCollection services)
         {
-            services.AddScoped<PetService>();
+            services.AddScoped<IPetService,PetService>();
 
             services.AddValidatorsFromAssembly(typeof(DependencyRegistration).Assembly);
 

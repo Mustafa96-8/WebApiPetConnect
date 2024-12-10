@@ -11,8 +11,9 @@ namespace WebApp.Application.Abstractions
 {
     public interface IPetsRepository
     {
-        Task<IResult<Guid,Error>> Add(Pet pet, CancellationToken ct);
+        Task<Result<Guid,Error>> Add(Pet pet, CancellationToken ct);
 
-        Task<IResult<Pet, Error>> Get(Guid id, CancellationToken ct);
+        Task<Result<Pet, Error>> Get(Guid id, CancellationToken ct);
+        Task<Result<IEnumerable<Pet>, Error>> GetAll(CancellationToken ct, string? includeProperties = null);
     }
 }

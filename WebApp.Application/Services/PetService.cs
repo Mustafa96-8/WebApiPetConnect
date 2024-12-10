@@ -30,9 +30,17 @@ namespace WebApp.Application.Services
 
             var volunteerPhoneNumber = PhoneNumber.Create(request.VolunteerPhoneNumber).Value;
 
-            var vaccinations = Vaccination.Create(request.Vaccinations);
 
-
+            var vaccinations = new List<Vaccination>();
+            foreach (VaccinationDTO vaccinationFromRequset in request.Vaccinations)
+            {
+                vaccinations.Add(Vaccination.Create(vaccinationFromRequset.Name, vaccinationFromRequset.Applied).Value);
+            }
+            var photos = new List<Photo>();
+            foreach (PhotoDTO photoFromRequset in request.Photos)
+            {
+                photos.Add(Photo.Create(photoFromRequset.Path, photoFromRequset.IsMain).Value);
+            }
 
             var pet = Pet.Create(
                 request.Nickname,
@@ -53,8 +61,8 @@ namespace WebApp.Application.Services
                 volunteerPhoneNumber,
                 request.OnTreatment,
                 request.CreatedTime,
-                new List<Vaccination>(),
-                new List<Photo>());
+                vaccinations,
+                photos);
 
             var id = await _petsRepository.Add(pet.Value, ct);
             if (id.IsFailure)

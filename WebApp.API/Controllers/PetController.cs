@@ -2,9 +2,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Application.Services.IServices;
-using WebApp.Domain.Entities;
-using WebApp.Domain.ValueObjects;
-using WebApp.Infrastracture;
 
 namespace WebApp.API.Controllers
 {
@@ -18,10 +15,10 @@ namespace WebApp.API.Controllers
 
         //get http://localhost:port/Pet/1?page=1&size=10
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id, [FromQuery] int page, [FromQuery] int? size) 
+        public async Task<IActionResult> Get([FromRoute] Guid id, [FromQuery] int page, [FromQuery] int? size,CancellationToken ct)  
         {
             if(Guid.Equals(id, Guid.Empty)) {return BadRequest(); }
-            var Pet = _petService.Get(id);
+            var Pet = await _petService.Get(id,ct);
             return Ok(id);                   
         }
         [HttpPost]
